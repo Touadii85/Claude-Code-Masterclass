@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# fichier de debug généré par le hook PostToolUse (leçon jq)
+/tool-use.json

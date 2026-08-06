@@ -9,14 +9,16 @@ export default function Home() {
     <div className="center-content">
       <div className="page-content">
         <h1>
-          P<Clock8 className="logo" strokeWidth={2.75} />cket Heist
+          P<Clock8 className="logo" strokeWidth={2.75} />
+          cket Heist
         </h1>
         <div>Tiny missions. Big office mischief.</div>
         <p className="mt-4">
-          Turn your office into a playground. Pocket Heist drops bite-sized challenges
-          into your team&apos;s day — sneak a prank past the boss, swap someone&apos;s
-          mouse settings, or start a rumor that spreads by lunchtime. No stakes, just
-          mischief. Sign up, pick a heist, and see who cracks first.
+          Turn your office into a playground. Pocket Heist drops bite-sized
+          challenges into your team&apos;s day — sneak a prank past the boss,
+          swap someone&apos;s mouse settings, or start a rumor that spreads by
+          lunchtime. No stakes, just mischief. Sign up, pick a heist, and see
+          who cracks first.
         </p>
       </div>
     </div>

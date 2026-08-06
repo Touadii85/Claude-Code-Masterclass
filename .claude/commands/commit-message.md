@@ -1,42 +1,42 @@
 ---
-description: Create a commit message by analyzing git diffs
+description: Créer un message de commit en analysant les diffs git
 allowed-tools: Bash(git status:*), Bash(git diff --staged), Bash(git commit:*)
 ---
 
-## Run these commands:
+## Lancer ces commandes :
 
 ```bash
 git status
 git diff --staged
 ```
 
-## Your task:
+## Ta tâche :
 
-Analyze above staged git changes and create a commit message. Use present tense and explain "why" something has changed, not just "what" has changed.
+Analyser les changements git stagés ci-dessus et créer un message de commit. Utiliser le présent et expliquer le "pourquoi" du changement, pas seulement le "quoi".
 
-## Commit types with emojis:
-Only use the following emojis: 
+## Types de commit avec emojis :
+N'utiliser que les emojis suivants : 
 
-- ✨ `feat:` - New feature
-- 🐛 `fix:` - Bug fix
-- 🔨 `refactor:` - Refactoring code
+- ✨ `feat:` - Nouvelle fonctionnalité
+- 🐛 `fix:` - Correction de bug
+- 🔨 `refactor:` - Refactorisation du code
 - 📝 `docs:` - Documentation
-- 🎨 `style:` - Styling/formatting
+- 🎨 `style:` - Style/formatage
 - ✅ `test:` - Tests
 - ⚡ `perf:` - Performance
 
-## Format:
-Use the following format for making the commit message:
+## Format :
+Utiliser le format suivant pour le message de commit :
 
 ```
-<emoji> <type>: <concise_description>
-<optional_body_explaining_why>
+<emoji> <type>: <description_concise>
+<corps_optionnel_expliquant_le_pourquoi>
 ```
 
-## Output:
+## Sortie :
 
-1. Show summary of changes currently staged
-2. Propose commit message with appropriate emoji
-3. Ask for confirmation before committing
+1. Afficher un résumé des changements actuellement stagés
+2. Proposer un message de commit avec l'emoji approprié
+3. Demander confirmation avant de commiter
 
-DO NOT auto-commit - wait for user approval, and only commit if the user says so.
+NE PAS commiter automatiquement - attendre l'approbation de l'utilisateur, et ne commiter que si l'utilisateur le demande.
