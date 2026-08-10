@@ -1,6 +1,8 @@
 // page de prévisualisation pour les nouveaux composants UI
 
 import SkeletonCard from "@/components/SkeletonCard"
+import LoginForm from "@/components/LoginForm"
+import SignupForm from "@/components/SignupForm"
 
 export default function PreviewPage() {
   return (
@@ -11,6 +13,13 @@ export default function PreviewPage() {
         <SkeletonCard />
         <SkeletonCard />
       </div>
+
+      {/* les formulaires embarquent les composants Input, PasswordInput et Button */}
+      <h3 className="mt-10">Login form</h3>
+      <LoginForm />
+
+      <h3 className="mt-10">Signup form</h3>
+      <SignupForm />
     </div>
   )
 }

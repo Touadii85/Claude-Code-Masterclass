@@ -1,0 +1,14 @@
+@reference "../../app/globals.css";
+
+.button {
+  @apply w-full text-center cursor-pointer;
+}
+
+/* état désactivé : opacité réduite et pas de changement de couleur au survol */
+.button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.button:disabled:hover {
+  @apply bg-primary;
+}

@@ -1,0 +1,48 @@
+import { ChangeEvent } from "react"
+import styles from "./Input.module.css"
+
+interface InputProps {
+  id: string
+  label: string
+  type?: string
+  value: string
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  required?: boolean
+  error?: string
+}
+
+export default function Input({
+  id,
+  label,
+  type = "text",
+  value,
+  onChange,
+  required = false,
+  error,
+}: InputProps) {
+  // identifiant du message d'erreur, relié à l'input via aria-describedby
+  const errorId = `${id}-error`
+
+  return (
+    <div className={styles.field}>
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
+      <input
+        id={id}
+        type={type}
+        value={value}
+        onChange={onChange}
+        required={required}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? errorId : undefined}
+        className={`${styles.input} ${error ? styles.inputError : ""}`}
+      />
+      {error && (
+        <p id={errorId} className={styles.error} role="alert">
+          {error}
+        </p>
+      )}
+    </div>
+  )
+}

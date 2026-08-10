@@ -1,0 +1,25 @@
+@reference "../../app/globals.css";
+
+.field {
+  @apply flex flex-col gap-1 mb-4;
+}
+
+.label {
+  @apply text-sm font-medium text-heading;
+}
+
+.input {
+  @apply w-full px-3 py-2 rounded-md bg-light border border-lighter text-heading transition-colors;
+}
+
+.input:focus {
+  @apply outline-none border-primary ring-2 ring-primary;
+}
+
+.inputError {
+  @apply border-error;
+}
+
+.error {
+  @apply text-sm text-error;
+}
