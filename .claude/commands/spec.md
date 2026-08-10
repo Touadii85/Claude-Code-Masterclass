@@ -1,6 +1,6 @@
 ---
 description: Créer un fichier de spec de fonctionnalité et une branche à partir d'une idée courte
-argument-hint: Description brève de la fonctionnalité
+argument-hint: "[Description brève de la fonctionnalité, optionnel : 'figma: <lien-composant>']"
 allowed-tools: Read, Write, Glob, Bash(git switch:*)
 ---
 
@@ -46,7 +46,29 @@ Vérifier la branche Git actuelle, et arrêter tout le processus s'il y a des fi
    - Format : `claude/feature/<slug_fonctionnalite>`
    - Exemple : `claude/feature/card-component`.
 
+4. `lien_figma` (optionnel)
+   - Si `$ARGUMENTS` contient la sous-chaîne `figma:`
+   - Alors le texte qui suit `figma:` est le lien du composant Figma.
+   - Retirer les espaces superflus.
+   - Exemple : `/spec Composant carte, figma: https://www.figma.com/design/...`
+     → `lien_figma` devient `https://www.figma.com/design/...`
+
 Si un `titre_fonctionnalite` et un `slug_fonctionnalite` cohérents ne peuvent pas être déduits, demander une clarification à l'utilisateur plutôt que de deviner.
+
+## Étape 2.5. Récupérer le contexte Figma si nécessaire
+
+Si `lien_figma` est présent et que les outils MCP Figma sont disponibles :
+
+1. Utiliser les outils MCP Figma pour localiser le composant, le layer ou le frame concerné.
+2. Extraire uniquement les informations utiles à l'implémentation :
+   - Dimensions et disposition (grille, espacements, alignement)
+   - Tokens de typographie (police, taille, graisse)
+   - Tokens de couleur et usage sémantique (primary, surface, border, error...)
+   - Rayon de bordure, ombres, détails visuels notables
+   - Icônes, boutons, liens ou autres éléments d'interface
+3. Résumer en 3 à 8 points concis, et laisser un lien vers le composant Figma pour référence future.
+4. Si la récupération échoue ou que les outils ne sont pas disponibles, noter :
+   `"Référence de design non récupérable. Se référer manuellement à Figma."`
 
 ## Étape 3. Basculer sur une nouvelle branche Git
 
