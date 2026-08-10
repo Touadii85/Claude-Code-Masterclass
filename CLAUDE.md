@@ -56,3 +56,7 @@ Icônes : `lucide-react` (l'horloge `Clock8` fait office de « o » dans le logo
 
 ### Tests
 Vitest + jsdom + Testing Library. Les tests vivent dans `tests/`, en miroir de l'arborescence source (`tests/components/Navbar.test.tsx`). `globals: true` est activé (pas besoin d'importer `describe`/`it`), les matchers `jest-dom` sont chargés via `vitest.setup.ts`, et `vite-tsconfig-paths` résout l'alias `@/*` → racine du projet.
+
+## Documentation à jour
+
+Pour toute fonctionnalité spécifique à une bibliothèque ou à un framework (Next.js, React, Tailwind CSS, etc.), toujours vérifier la documentation correspondante via le serveur MCP Context7 **avant d'écrire la moindre ligne de code**. Cela garantit de se référer à la documentation la plus récente de chaque framework ou bibliothèque utilisé dans ce projet, notamment pour ajouter une nouvelle fonctionnalité nécessitant une configuration spécifique à partir de ces bibliothèques.
