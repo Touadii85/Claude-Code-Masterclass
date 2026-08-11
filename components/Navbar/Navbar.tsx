@@ -33,7 +33,10 @@ export default function Navbar() {
         <ul>
           {user && (
             <li>
-              <button onClick={handleLogout} className="btn">
+              <button
+                onClick={handleLogout}
+                className={`btn ${styles.logoutBtn}`}
+              >
                 <LogOut size={16} strokeWidth={2.5} />
                 Logout
               </button>
