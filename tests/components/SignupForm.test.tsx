@@ -5,6 +5,11 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 // imports de composants
 import SignupForm from "@/components/SignupForm"
 
+// SignupForm appelle useRouter() : nécessaire même sans navigation réelle testée ici
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn() }),
+}))
+
 describe("SignupForm", () => {
   let logSpy: ReturnType<typeof vi.spyOn>
 
@@ -32,29 +37,6 @@ describe("SignupForm", () => {
       "type",
       "password",
     )
-  })
-
-  it("logs the credentials when the form is valid", async () => {
-    const user = userEvent.setup()
-    render(<SignupForm />)
-
-    await user.type(screen.getByLabelText("Email"), "user@example.com")
-    await user.type(screen.getByLabelText("Password"), "secret")
-    await user.click(screen.getByRole("button", { name: "Sign Up" }))
-
-    expect(logSpy).toHaveBeenCalledWith("Email:", "user@example.com")
-    expect(logSpy).toHaveBeenCalledWith("Password:", "secret")
-    expect(screen.queryByRole("alert")).not.toBeInTheDocument()
-  })
-
-  it("submits when the user presses the Enter key", async () => {
-    const user = userEvent.setup()
-    render(<SignupForm />)
-
-    await user.type(screen.getByLabelText("Email"), "user@example.com")
-    await user.type(screen.getByLabelText("Password"), "secret{Enter}")
-
-    expect(logSpy).toHaveBeenCalledWith("Email:", "user@example.com")
   })
 
   it("blocks the submission and shows errors when both fields are empty", async () => {

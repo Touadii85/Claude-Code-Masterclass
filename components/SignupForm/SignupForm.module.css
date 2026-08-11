@@ -15,3 +15,7 @@
 .switchLink:hover {
   @apply text-secondary;
 }
+
+.error {
+  @apply bg-error/10 text-error text-sm p-3 rounded mb-4;
+}

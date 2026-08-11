@@ -9,6 +9,7 @@ interface InputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   required?: boolean
   error?: string
+  disabled?: boolean
 }
 
 export default function Input({
@@ -19,6 +20,7 @@ export default function Input({
   onChange,
   required = false,
   error,
+  disabled = false,
 }: InputProps) {
   // identifiant du message d'erreur, relié à l'input via aria-describedby
   const errorId = `${id}-error`
@@ -34,6 +36,7 @@ export default function Input({
         value={value}
         onChange={onChange}
         required={required}
+        disabled={disabled}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
         className={`${styles.input} ${error ? styles.inputError : ""}`}

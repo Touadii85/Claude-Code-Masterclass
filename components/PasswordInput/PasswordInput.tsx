@@ -11,6 +11,7 @@ interface PasswordInputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   required?: boolean
   error?: string
+  disabled?: boolean
 }
 
 export default function PasswordInput({
@@ -20,6 +21,7 @@ export default function PasswordInput({
   onChange,
   required = false,
   error,
+  disabled = false,
 }: PasswordInputProps) {
   // état d'affichage du mot de passe : masqué par défaut
   const [showPassword, setShowPassword] = useState(false)
@@ -39,6 +41,7 @@ export default function PasswordInput({
           value={value}
           onChange={onChange}
           required={required}
+          disabled={disabled}
           aria-invalid={Boolean(error)}
           aria-describedby={error ? errorId : undefined}
           className={`${styles.input} ${error ? styles.inputError : ""}`}
@@ -47,6 +50,7 @@ export default function PasswordInput({
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
+          disabled={disabled}
           aria-label={showPassword ? "Hide password" : "Show password"}
           aria-pressed={showPassword}
           className={styles.toggle}
