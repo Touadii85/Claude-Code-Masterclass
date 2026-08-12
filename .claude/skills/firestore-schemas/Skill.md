@@ -45,10 +45,15 @@ export interface UpdateHeistInput {
 # Pattern du converter
 
 ```typescript
-import { DocumentData, QueryDocumentSnapshot } from 'firebase/firestore'
+import {
+  DocumentData,
+  FirestoreDataConverter,
+  QueryDocumentSnapshot,
+  WithFieldValue,
+} from 'firebase/firestore'
 
-export const heistConverter = {
-  toFirestore: (data: Partial<Heist>): DocumentData => data,
+export const heistConverter: FirestoreDataConverter<Heist> = {
+  toFirestore: (data: WithFieldValue<Heist>): DocumentData => data,
 
   fromFirestore: (snapshot: QueryDocumentSnapshot): Heist => ({
     id: snapshot.id,
@@ -60,11 +65,15 @@ export const heistConverter = {
   } as Heist),
 }
 
-// Utilisation
-const ref = collection(db, COLLECTIONS.HEISTS).withConverter(heistConverter)
+// Utilisation (lecture)
+const ref = collection(db, COLLECTIONS.HEISTS).withConverter<Heist>(heistConverter)
 ```
 
-**Note :** les converters fonctionnent avec `addDoc` et `setDoc`, PAS avec `updateDoc`.
+**Notes :**
+- Toujours typer le converter en `FirestoreDataConverter<Entity>` explicitement (pas un objet littéral non typé) et `toFirestore` en `WithFieldValue<Entity>` (pas `Partial<Entity>`). Sans ça, TypeScript infère mal le générique de `.withConverter()` et masque de vraies erreurs de type au lieu de les révéler.
+- Passer aussi le générique explicite à `.withConverter<Entity>(...)` à l'usage, plutôt que de compter sur l'inférence.
+- Les converters fonctionnent avec `addDoc` et `setDoc`, PAS avec `updateDoc`.
+- `.withConverter(entityConverter)` sert aux **lectures**. Pour une écriture avec `Create{Entity}Input` (qui a `createdAt: FieldValue` et pas d'`id`), ne pas l'utiliser : `WithFieldValue<Entity>` exige un `id` et n'accepte pas ce mélange de champs. Écrire directement `addDoc(collection(db, COLLECTIONS.X), input)` sans converter.
 
 # Export groupé (barrel export)
 

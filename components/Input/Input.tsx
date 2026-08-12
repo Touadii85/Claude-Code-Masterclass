@@ -7,6 +7,7 @@ interface InputProps {
   type?: string
   value: string
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  placeholder?: string
   required?: boolean
   error?: string
   disabled?: boolean
@@ -18,6 +19,7 @@ export default function Input({
   type = "text",
   value,
   onChange,
+  placeholder,
   required = false,
   error,
   disabled = false,
@@ -35,6 +37,7 @@ export default function Input({
         type={type}
         value={value}
         onChange={onChange}
+        placeholder={placeholder}
         required={required}
         disabled={disabled}
         aria-invalid={Boolean(error)}
