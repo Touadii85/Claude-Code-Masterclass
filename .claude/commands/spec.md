@@ -59,16 +59,19 @@ Si un `titre_fonctionnalite` et un `slug_fonctionnalite` cohérents ne peuvent p
 
 Si `lien_figma` est présent et que les outils MCP Figma sont disponibles :
 
-1. Utiliser les outils MCP Figma pour localiser le composant, le layer ou le frame concerné.
-2. Extraire uniquement les informations utiles à l'implémentation :
+Utiliser le sous-agent **figma-design-extractor** pour fournir des directives de conception pour cette fonctionnalité, en citant `lien_figma`, et lui demander de :
+
+1. Extraire uniquement les informations utiles à l'implémentation :
    - Dimensions et disposition (grille, espacements, alignement)
    - Tokens de typographie (police, taille, graisse)
    - Tokens de couleur et usage sémantique (primary, surface, border, error...)
    - Rayon de bordure, ombres, détails visuels notables
    - Icônes, boutons, liens ou autres éléments d'interface
-3. Résumer en 3 à 8 points concis, et laisser un lien vers le composant Figma pour référence future.
-4. Si la récupération échoue ou que les outils ne sont pas disponibles, noter :
+2. Résumer en 3 à 8 points concis, et laisser un lien vers le composant Figma pour référence future.
+3. Si la récupération échoue ou que les outils ne sont pas disponibles, noter :
    `"Référence de design non récupérable. Se référer manuellement à Figma."`
+
+Toujours résumer sous forme de notes lisibles par un humain.
 
 ## Étape 3. Basculer sur une nouvelle branche Git
 
