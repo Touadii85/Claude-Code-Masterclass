@@ -7,7 +7,11 @@ import HeistsPage from "@/app/(dashboard)/heists/page"
 
 vi.mock("@/lib/hooks", () => ({ useHeists: vi.fn() }))
 
-function makeHeist(id: string, title: string): Heist {
+function makeHeist(
+  id: string,
+  title: string,
+  overrides: Partial<Heist> = {},
+): Heist {
   return {
     id,
     title,
@@ -17,8 +21,9 @@ function makeHeist(id: string, title: string): Heist {
     assignedTo: "uid-shadow",
     assignedToCodename: "Shadow",
     createdAt: new Date(),
-    deadline: new Date(),
+    deadline: new Date(Date.now() + 4 * 60 * 60 * 1000),
     finalStatus: null,
+    ...overrides,
   }
 }
 
@@ -34,7 +39,7 @@ function mockHeistsByFilter(
 }
 
 describe("HeistsPage", () => {
-  it("displays titles from each of the three filtered sections", () => {
+  it("renders HeistCard links for active and assigned heists, and keeps expired heists as plain text", () => {
     mockHeistsByFilter({
       active: { heists: [makeHeist("1", "Steal the stapler")] },
       assigned: { heists: [makeHeist("2", "Swap the coffee")] },
@@ -43,17 +48,27 @@ describe("HeistsPage", () => {
 
     render(<HeistsPage />)
 
-    expect(screen.getByText("Steal the stapler")).toBeInTheDocument()
-    expect(screen.getByText("Swap the coffee")).toBeInTheDocument()
+    expect(
+      screen.getByRole("link", { name: "Steal the stapler" }),
+    ).toHaveAttribute("href", "/heists/1")
+    expect(
+      screen.getByRole("link", { name: "Swap the coffee" }),
+    ).toHaveAttribute("href", "/heists/2")
+
     expect(screen.getByText("Old caper")).toBeInTheDocument()
+    expect(
+      screen.queryByRole("link", { name: "Old caper" }),
+    ).not.toBeInTheDocument()
   })
 
-  it("shows a loading indicator per section while its data is loading", () => {
+  it("shows three HeistCardSkeleton while active heists are loading", () => {
     mockHeistsByFilter({ active: { loading: true } })
 
     render(<HeistsPage />)
 
-    expect(screen.getAllByText("Loading...")).toHaveLength(1)
+    expect(
+      screen.getAllByRole("status", { name: /loading heist/i }),
+    ).toHaveLength(3)
   })
 
   it("shows an empty-state message when a section has no heists", () => {
