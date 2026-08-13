@@ -2,22 +2,36 @@
 
 *Cours : Claude Code Masterclass, Section 5 (6/7 leçons, 46 min).*
 
-Cette section du cours n'a laissé aucune trace directe dans les 8 sessions analysées. Aucune des images collées ne montre le formateur en train d'expliquer la notion de « Skill » ou de « Plugin » Claude Code (créer un fichier `SKILL.md`, installer un plugin, parcourir un marketplace, etc.).
+Aucune capture de la vidéo de formation ne couvre cette section. Mais une leçon bien réelle s'y rattache quand même, pas montrée par le formateur, appliquée directement par moi dans le terminal. Ma première passe sur cette section ne cherchait que des captures d'écran, donc elle l'a manquée.
 
-## Aucune leçon vidéo identifiée pour cette section
+## Installer et utiliser le plugin `frontend-design` d'Anthropic
 
-Après lecture des 8 rapports et vérification visuelle des images candidates, rien ne correspond à la Section 5 telle que décrite dans la table des matières Udemy.
+**Session source :** ecc9fb7c, 12/08/2026, à partir de 09h39
 
-**Ce qui a été vérifié et écarté :**
+**Ce qui s'est passé :** j'ai installé le plugin officiel Anthropic depuis le terminal Claude Code.
 
-- **Le skill `.claude/skills/firestore-schemas/Skill.md`**, créé par Claude lui-même dans le commit `241a4cb` (« update heist type », 12/08 12:26) pendant la génération des types Firestore, puis étendu dans `6b9f2ec` (« feat: formulaire Create Heist », 12/08 16:19) après la découverte d'un bug de typage (`FirestoreDataConverter` attendait `WithFieldValue<X>` et non `Partial<X>`), documenté après coup pour éviter que le bug se reproduise. Bonne pratique appliquée par Claude, mais aucune image collée ne montre le formateur créer ou expliquer ce mécanisme de skill. L'image de la session 62cf38a7 (et sa quasi-copie dans ecc9fb7c) montre juste le texte d'un prompt sur les champs du document Firestore `heist`, rien sur la notion de skill elle-même. Cette leçon appartient plutôt à la [Section 4 (MCP Servers / Firebase)](./section-4-mcp-servers.md), ou reste une pratique interne à Claude, pas un contenu de la Section 5.
+```
+✓ Installed frontend-design. Plugin is now active.
+```
 
-- **Les commandes `/component` et `/commit-message`**, présentes dans `.claude/commands/` (créées le 06/08). Le récapitulatif de la session 8d281e45 les classe lui-même, via le sommaire réel du cours affiché à l'écran, sous « Section 2 : Commands, Context, Tools & Hooks ». Pas sous Plugins & Skills. Ce sont des commandes personnalisées (custom slash commands), un mécanisme distinct des skills. Voir [`section-2-commands-context-tools-hooks.md`](./section-2-commands-context-tools-hooks.md).
+Six minutes plus tard, à 09h47, j'ai demandé une refonte de la page d'accueil publique (pour les visiteurs pas encore inscrits, avec un bouton d'inscription). Claude a invoqué le skill (`Skill({"skill": "frontend-design:frontend-design"})`), puis a lu `globals.css`, le layout public, `Button.tsx`, la page signup et la Navbar, pour caler la refonte sur la palette déjà en place plutôt que d'en inventer une nouvelle.
 
-- **La commande `/spec` (commit `d4c3bc8`)**, même chose. Aucune image des 8 sessions ne montre sa création depuis la vidéo. Les seules leçons vidéo captées à son sujet portent sur le contenu des specs (template, sections, formulation), qui relève de la [Section 3 (Plan Mode & Specs)](./section-3-plan-mode-specs.md), déjà couverte ailleurs.
+**Ce que ça a produit :** une nouvelle page d'accueil (`app/(public)/page.tsx`), avec un bandeau « Top Secret » incliné, un titre agrandi, l'accroche « Perfectly petty », quatre badges de fonctionnalités (Plan Heists, Assign Tasks, Earn Glory, Stay Sneaky), et deux boutons d'action, « Start Your First Heist » vers `/signup`, un lien de connexion vers `/login`. Quelques ajustements dans `globals.css`, dont une correction sur `.center-content` qui forçait un `text-justify` indésirable.
 
-- **Les hooks `PostToolUse`** (sessions bc2538f9 et a056c64e), bien documentés, mais explicitement Section 2, pas Plugins & Skills.
+**Application dans Pocket Heist :** le changement est bien dans le dépôt, mais caché dans un commit au message trompeur, `241a4cb`, intitulé juste « update heist type » (12/08, 12h26). Ce commit regroupe trois choses sans rapport, les types Firestore des heists, le skill `firestore-schemas`, et cette refonte de page d'accueil. Le message ne mentionne aucune des deux dernières.
 
-## Conclusion
+**La session n'a pas été simple.** Un premier essai s'est arrêté trop tôt, Claude n'avait modifié que `page.tsx`, sans vérifier les fichiers liés. J'ai coupé court, à 10h00 :
 
-Aucune leçon confirmée pour cette section. Les seuls objets du projet qui portent le nom « skill » (`.claude/skills/firestore-schemas/`, `.claude/skills/humanizer/`) ou qui ressemblent à des plugins ne sont pas rattachables à une capture vidéo. Soit ce sont des initiatives autonomes de Claude, soit ils appartiennent aux Sections 2, 3 ou 4 déjà traitées ailleurs dans ce dossier. Si le formateur a bien consacré 46 minutes à ce sujet dans le cours, je ne l'ai pas encore suivi, ou pas collé de capture, au moment des 8 sessions couvertes ici.
+> stop vous ne vous êtes arreter qu'au fichier page.tsx pas autres qu'il lui sont liée global.css et d'autres c'est quoi cette erruer minable recommencer et on teste le skill frontend design
+
+Claude a repris, vérifié `globals.css`, corrigé le `.center-content`, relancé les tests (57 verts) et le lint, avant de confirmer l'état exact par `git status` plutôt que de deviner.
+
+## Ce que je n'ai pas pu confirmer
+
+Sur toute la session `ecc9fb7c` et sa continuation `f6e0d53f`, le skill `frontend-design` n'est invoqué explicitement qu'une seule fois, celle décrite ci-dessus. Juste après, dans la même session, le travail est passé au formulaire Create Heist (spec, plan, puis commit `6b9f2ec` à 16h19), déjà documenté dans [`section-3-plan-mode-specs.md`](./section-3-plan-mode-specs.md) et [`section-4-mcp-servers.md`](./section-4-mcp-servers.md). Rien dans les échanges ne montre un second appel au skill pour cette partie du travail. Les principes du skill (garder la palette existante, ne pas en inventer une nouvelle) ont pu influencer le style du formulaire par la suite sans nouvel appel explicite, mais je n'ai pas de preuve directe de ça, donc je ne l'affirme pas.
+
+## Ce qui reste écarté
+
+- **Les commandes `/component` et `/commit-message`**, créées le 06/08. Le récapitulatif de la session 8d281e45 les classe lui-même en Section 2, pas en Section 5. Voir [`section-2-commands-context-tools-hooks.md`](./section-2-commands-context-tools-hooks.md).
+- **La commande `/spec`**, dont le contenu pédagogique porte sur la rédaction de specs, donc en Section 3. Voir [`section-3-plan-mode-specs.md`](./section-3-plan-mode-specs.md).
+- **Le skill `.claude/skills/firestore-schemas/Skill.md`**, créé par Claude pendant la génération des types Firestore. Pas de capture ni de leçon vidéo qui l'explique, il reste hors périmètre ici.

@@ -14,7 +14,7 @@ J'ai analysé 8 sessions Claude Code (`bef46bcb`, `bc2538f9`, `a056c64e`, `8d281
 | [Section 2 : Commands, Context, Tools & Hooks](./section-2-commands-context-tools-hooks.md) | Hooks `PostToolUse`, log `jq`, chaînage avec `prettier`, commandes `/commit-message` et `/component` |
 | [Section 3 : Plan Mode & Specs](./section-3-plan-mode-specs.md) | Template de spec, méthode de rédaction complète, prompt `/spec`, du spec au plan d'implémentation, plus la chronologie complète des 9 specs du projet (`_specs/`) |
 | [Section 4 : MCP Servers](./section-4-mcp-servers.md) | Plan Firebase MCP (Firestore + Auth). Figma MCP et Context7 sont utilisés mais aucune capture ne vient de la vidéo pour eux |
-| [Section 5 : Plugins & Skills](./section-5-plugins-skills.md) | Aucun. Rien de capté ne correspond à ce thème |
+| [Section 5 : Plugins & Skills](./section-5-plugins-skills.md) | Installation et usage du plugin Anthropic `frontend-design`, refonte de la page d'accueil publique |
 
 ## À lire avec ces nuances
 
