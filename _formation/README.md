@@ -12,7 +12,7 @@ Reconstitution des leçons de la vidéo de formation (**Claude Code Masterclass*
 |---|---|
 | [Section 1 — Introduction](./section-1-introduction.md) | Aucun — les captures commencent après cette section |
 | [Section 2 — Commands, Context, Tools & Hooks](./section-2-commands-context-tools-hooks.md) | Hooks `PostToolUse`, log `jq`, chaînage avec `prettier`, commandes `/commit-message` et `/component` |
-| [Section 3 — Plan Mode & Specs](./section-3-plan-mode-specs.md) | Template de spec, méthode de rédaction complète, prompt `/spec`, du spec au plan d'implémentation |
+| [Section 3 — Plan Mode & Specs](./section-3-plan-mode-specs.md) | Template de spec, méthode de rédaction complète, prompt `/spec`, du spec au plan d'implémentation, + chronologie complète des 9 specs du projet (`_specs/`) |
 | [Section 4 — MCP Servers](./section-4-mcp-servers.md) | Plan Firebase MCP (Firestore + Auth) — Figma MCP et Context7 utilisés mais non captés depuis la vidéo |
 | [Section 5 — Plugins & Skills](./section-5-plugins-skills.md) | Aucun — rien de capté ne correspond à ce thème |
 

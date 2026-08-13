@@ -54,6 +54,24 @@ Cette section documente comment le formateur enseigne la méthode de rédaction 
 
 **Application dans Pocket Heist :** `_specs/signup-firebase-integration.md` reprend fidèlement la génération de codename et l'exclusion de l'email du document Firestore — commit `1db9f37` (« 📝 docs: spec pour Signup Firebase Integration », 11/08/2026, 13:03), implémenté ensuite en `d683af4` (« ✨ feat: connecte le formulaire d'inscription à Firebase Auth », 11/08/2026, 13:10).
 
-## Applications ultérieures de la méthode (mention brève)
+## Chronologie complète des specs du projet
 
-Plusieurs autres fonctionnalités utilisent le même couple spec/plan (bouton logout, login form, route protection, formulaire Create Heist — sessions 6b055b65 et ecc9fb7c) : elles appliquent une méthode déjà acquise plutôt qu'elles n'enseignent une technique nouvelle, donc pas de fiche dédiée ici. Un point mérite tout de même d'être signalé : dans ecc9fb7c, le premier plan proposé par Claude pour le formulaire Create Heist (avec un composant séparé `CreateHeistForm`) a été **rejeté** par Ilies puis entièrement réécrit pour coller à la structure vue dans la vidéo du formateur — bon exemple concret de l'usage du mode plan comme étape de relecture/correction *avant* le code, implémenté ensuite dans le commit `6b9f2ec` (« feat: formulaire Create Heist », 12/08/2026, 16:19).
+Les fonctionnalités suivantes appliquent la même méthode (spec puis plan) sans qu'une nouvelle capture vidéo enseigne une technique différente — donc pas de fiche dédiée avec « ce que montre la vidéo » pour chacune. Mais pour savoir précisément ce qui a été fait, et dans quel ordre, voici la suite **complète** des fichiers de `_specs/`, reconstituée depuis l'historique git réel (`git log --diff-filter=A --follow`) plutôt que depuis les captures :
+
+| # | Fichier | Commit | Date | Sujet |
+|---|---|---|---|---|
+| 1 | `template.md` | `d4c3bc8` | 06/08 17:00 | Le template lui-même (voir plus haut) |
+| 2 | `login-signup-forms.md` | `df83e8d` | 10/08 09:20 | Formulaires login/signup (UI seule) |
+| 3 | `auth-state-hook.md` | `96f5001` | 11/08 12:51 | Hook `useUser` (voir plus haut) |
+| 4 | `signup-firebase-integration.md` | `1db9f37` | 11/08 13:03 | Connexion Firebase Auth du formulaire d'inscription (voir plus haut) |
+| 5 | `logout-button.md` | `50ddb7d` puis renommé par `4c185e7` | 11/08 14:32 → 15:29 | Bouton de déconnexion (créé sous le nom `logout-functionality.md`, renommé le jour même) |
+| 6 | `login-form.md` | `e8daee6` | 11/08 16:26 | Formulaire de login (UI seule) |
+| 7 | `login-form-functionality.md` | `b674c2d` | 11/08 16:39 | Connexion Firebase Auth du formulaire de login — spec **distincte** de la précédente, rédigée 13 min après (même découpage UI/logique que login-signup-forms → signup-firebase-integration) |
+| 8 | `route-protection-auth-guards.md` | `abf8300` | 11/08 17:45 | Protection des routes selon l'état d'authentification |
+| 9 | `create-heist-form.md` | `6b9f2ec` | 12/08 16:19 | Formulaire de création de heist |
+
+Ce tableau révèle un pattern répété que les captures vidéo isolées ne montrent pas : **chaque fonctionnalité connectée à Firebase est spécifiée en deux temps** — d'abord l'UI seule (`login-signup-forms.md`, `login-form.md`), puis sa connexion réelle au backend dans un fichier séparé (`signup-firebase-integration.md`, `login-form-functionality.md`). Ce découpage n'apparaît dans aucune capture retenue plus haut, mais c'est la méthode réellement suivie tout du long.
+
+Un point vaut aussi d'être signalé : dans la session `ecc9fb7c`, le premier plan proposé par Claude pour le formulaire Create Heist (avec un composant séparé `CreateHeistForm`) a été **rejeté** par Ilies puis entièrement réécrit pour coller à la structure vue dans la vidéo du formateur — bon exemple concret de l'usage du mode plan comme étape de relecture/correction *avant* le code.
+
+**Non couvert par cette reconstitution :** un dixième fichier, `_specs/use-heists-hook.md`, existe dans le dépôt mais n'a **jamais été commité** (`git status` le montre encore en `??`, non suivi). C'est un travail en cours, postérieur à ce qui a été analysé ici — à documenter séparément une fois committé.
