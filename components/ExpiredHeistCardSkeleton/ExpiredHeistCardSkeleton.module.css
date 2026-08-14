@@ -1,0 +1,35 @@
+@reference "../../app/globals.css";
+
+.card {
+  @apply bg-lighter/30 border border-border/30 rounded-[10px] p-4 flex flex-col gap-2 animate-pulse;
+}
+.header {
+  @apply flex items-center justify-between gap-2 flex-wrap;
+}
+.headerLeft {
+  @apply flex items-center gap-2;
+}
+.icon {
+  @apply h-4 w-4 rounded-full bg-border shrink-0;
+}
+.titleLine {
+  @apply h-4 w-32 rounded bg-border;
+}
+.dateLine {
+  @apply h-3 w-20 rounded bg-border;
+}
+.badgeLine {
+  @apply h-4 w-16 rounded bg-border shrink-0;
+}
+.meta {
+  @apply flex flex-col gap-1;
+}
+.line {
+  @apply h-3 rounded bg-border;
+}
+.lineWide {
+  @apply w-2/5;
+}
+.lineMedium {
+  @apply w-1/3;
+}

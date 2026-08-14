@@ -1,0 +1,50 @@
+@reference "../../app/globals.css";
+
+.card {
+  @apply bg-lighter/30 border border-border/30 rounded-[10px] p-4 flex flex-col gap-2;
+}
+.header {
+  @apply flex items-center justify-between gap-2 flex-wrap;
+}
+.headerLeft {
+  @apply flex items-center gap-2 flex-wrap;
+}
+.title {
+  @apply text-base leading-6 text-heading;
+}
+.date {
+  @apply flex items-center gap-1.5 text-sm leading-5 text-body shrink-0;
+}
+.dateIcon {
+  @apply text-body shrink-0;
+}
+.iconSuccess {
+  @apply text-success shrink-0;
+}
+.iconFailure {
+  @apply text-error shrink-0;
+}
+.badge {
+  @apply text-xs font-semibold uppercase tracking-[0.6px] rounded-[4px] px-2 py-0.5 border shrink-0;
+}
+.badgeSuccess {
+  @apply bg-success/5 border-success/20 text-success;
+}
+.badgeFailure {
+  @apply bg-error/5 border-error/20 text-error;
+}
+.meta {
+  @apply flex flex-col gap-1;
+}
+.metaLine {
+  @apply flex items-center gap-2 text-sm leading-5 text-body;
+}
+.metaIcon {
+  @apply text-body shrink-0;
+}
+.assignee {
+  @apply text-primary;
+}
+.creator {
+  @apply text-secondary;
+}

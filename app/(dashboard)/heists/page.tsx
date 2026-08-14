@@ -3,6 +3,8 @@
 import { useHeists } from "@/lib/hooks"
 import HeistCard from "@/components/HeistCard"
 import HeistCardSkeleton from "@/components/HeistCardSkeleton"
+import ExpiredHeistCard from "@/components/ExpiredHeistCard"
+import ExpiredHeistCardSkeleton from "@/components/ExpiredHeistCardSkeleton"
 import styles from "./page.module.css"
 
 export default function HeistsPage() {
@@ -74,19 +76,28 @@ export default function HeistsPage() {
         )}
       </div>
 
-      {/* expired-heists : inchangé, hors périmètre de cette feature (juste les classes emptyState/errorMessage appliquées, par cohérence) */}
       <div className="expired-heists">
         <h2>All Expired Heists</h2>
-        {expiredLoading && <p>Loading...</p>}
+        {expiredLoading && (
+          <div className={styles.list}>
+            {Array.from({ length: 3 }).map((_, i) => (
+              <ExpiredHeistCardSkeleton key={i} />
+            ))}
+          </div>
+        )}
         {expiredError && (
           <p className={styles.errorMessage}>Error: {expiredError}</p>
         )}
         {!expiredLoading && !expiredError && expiredHeists.length === 0 && (
           <p className={styles.emptyState}>No expired heists</p>
         )}
-        {!expiredLoading &&
-          !expiredError &&
-          expiredHeists.map((heist) => <div key={heist.id}>{heist.title}</div>)}
+        {!expiredLoading && !expiredError && expiredHeists.length > 0 && (
+          <div className={styles.list}>
+            {expiredHeists.map((heist) => (
+              <ExpiredHeistCard key={heist.id} heist={heist} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

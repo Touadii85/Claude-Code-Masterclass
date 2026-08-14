@@ -39,11 +39,13 @@ function mockHeistsByFilter(
 }
 
 describe("HeistsPage", () => {
-  it("renders HeistCard links for active and assigned heists, and keeps expired heists as plain text", () => {
+  it("renders HeistCard links for active and assigned heists, and a non-clickable ExpiredHeistCard for expired heists", () => {
     mockHeistsByFilter({
       active: { heists: [makeHeist("1", "Steal the stapler")] },
       assigned: { heists: [makeHeist("2", "Swap the coffee")] },
-      expired: { heists: [makeHeist("3", "Old caper")] },
+      expired: {
+        heists: [makeHeist("3", "Old caper", { finalStatus: "failure" })],
+      },
     })
 
     render(<HeistsPage />)
@@ -56,9 +58,22 @@ describe("HeistsPage", () => {
     ).toHaveAttribute("href", "/heists/2")
 
     expect(screen.getByText("Old caper")).toBeInTheDocument()
+    expect(screen.getByText("FAILED")).toBeInTheDocument()
     expect(
       screen.queryByRole("link", { name: "Old caper" }),
     ).not.toBeInTheDocument()
+  })
+
+  it("shows a SUCCESS badge for expired heists that finished successfully", () => {
+    mockHeistsByFilter({
+      expired: {
+        heists: [makeHeist("4", "Vault job", { finalStatus: "success" })],
+      },
+    })
+
+    render(<HeistsPage />)
+
+    expect(screen.getByText("SUCCESS")).toBeInTheDocument()
   })
 
   it("shows three HeistCardSkeleton while active heists are loading", () => {
@@ -68,6 +83,16 @@ describe("HeistsPage", () => {
 
     expect(
       screen.getAllByRole("status", { name: /loading heist/i }),
+    ).toHaveLength(3)
+  })
+
+  it("shows three ExpiredHeistCardSkeleton while expired heists are loading", () => {
+    mockHeistsByFilter({ expired: { loading: true } })
+
+    render(<HeistsPage />)
+
+    expect(
+      screen.getAllByRole("status", { name: /loading expired heist/i }),
     ).toHaveLength(3)
   })
 
